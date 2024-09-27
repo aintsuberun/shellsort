@@ -1,15 +1,11 @@
-#include <iostream>
+#include "functions.h"
+#include "solve.h"
 
 using namespace std;
 
-
-void qwe() {
-	cout << "Gqwe" << endl;
-}
-
 int main() {
-	qwe();
-	cout << "hello" << endl;
-	cout << "hello" << endl;
-
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	srand(static_cast<unsigned int>(time(NULL)));
+	solution();
 }
