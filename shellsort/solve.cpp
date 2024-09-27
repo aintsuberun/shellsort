@@ -2,7 +2,177 @@
 #include "Interface.h"
 #include "ShellaSort.h"
 
-enum { TestWithRandom = 1, Manual = 2, Exit = 3 };
+enum MainMenu { TestWithRandom = 1, Manual = 2, Exit = 3 };
+enum Save {Original = 1, Product, No};
+
+void Save(vector<double>& unsortedarray, vector<double>& sortedarray) {
+	int choice;
+	cout << endl << endl << "Хотите сохранить результат в файл?" << endl << "Сохранить исходные данные - 1" << endl << "Сохранить результат - 2" << endl << "Нет - 3" << endl << "> ";
+	choice = CheckInt();
+	while (choice != Original and choice != Product and choice != No) {
+		cout << "Такого пункта меню не существует, выберите другой: ";
+		choice = CheckInt();
+	}
+	if (choice == Original) {
+		fstream file = OpenFile();
+		if (!file.is_open()) {
+			cout << "Ошибка. Попробуйте снова: " << endl;
+			file = OpenFile();
+			if (file.is_open()) {
+				file << "Неотсортированный массив:" << endl;
+				for (int i = 0; i < unsortedarray.size(); i++) {
+					//if (i < unsortedarray.size() - 1) {
+						//file << endl;
+					//}
+					///else {
+						file << unsortedarray[i] << "\t";
+					//}
+				}
+				file << endl << "Отсортированный массив:" << endl;
+				for (int i = 0; i < sortedarray.size(); i++) {
+					//if (i < sortedarray.size() - 1) {
+						//file << endl;
+					//}
+					//else {
+						file << sortedarray[i] << "\t";
+					//}
+				}
+			}
+			while (!file.is_open()) {
+				cout << "Ошибка. Попробуйте снова: " << endl;
+				file = OpenFile();
+				if (file.is_open()) {
+					file << "Неотсортированный массив:" << endl;
+					for (int i = 0; i < unsortedarray.size(); i++) {
+						//if (i < unsortedarray.size() - 1) {
+							//file << endl;
+						//}
+						//else {
+							file << unsortedarray[i] << "\t";
+						//}
+					}
+					file << endl << "Отсортированный массив:" << endl;
+					for (int i = 0; i < sortedarray.size(); i++) {
+						//if (i < sortedarray.size() - 1) {
+							file << endl;
+						//}
+						//else {
+							file << sortedarray[i] << "\t";
+						//}
+					}
+				}
+			}
+		}
+		else {
+			file << "Неотсортированный массив:" << endl;
+			for (int i = 0; i < unsortedarray.size(); i++) {
+				//if (i < unsortedarray.size() - 1) {
+					file << endl;
+				//}
+				///else {
+					file << unsortedarray[i] << "\t";
+				//}
+			}
+			file << endl << "Отсортированный массив:" << endl;
+			for (int i = 0; i < sortedarray.size(); i++) {
+				//if (i < sortedarray.size() - 1) {
+					file << endl;
+				//}
+				//else {
+					file << sortedarray[i] << "\t";
+				//}
+			}
+		}
+		cout << endl << "Файл открыт.";
+		cout << endl << endl << "Хотите сохранить результат в файл?" << endl << "Сохранить исходные данные - 1" << endl << "Сохранить результат - 2" << endl << "Нет - 3" << endl << "> ";
+		choice = CheckInt();
+		while (choice != Original and choice != Product and choice != No) {
+			cout << "Такого пункта меню не существует, выберите другой: ";
+			choice = CheckInt();
+		}
+	}
+	if (choice == Product) {
+		fstream file = OpenFile();
+		if (!file.is_open()) {
+			cout << "Ошибка. Попробуйте снова: " << endl;
+			file = OpenFile();
+			if (file.is_open()) {
+				file << "Неотсортированный массив:" << endl;
+				for (int i = 0; i < unsortedarray.size(); i++) {
+					//if (i < unsortedarray.size() - 1) {
+						//file << endl;
+					//}
+					//else {
+						file << unsortedarray[i] << "\t";
+					//}
+				}
+				file << endl << "Отсортированный массив:" << endl;
+				for (int i = 0; i < sortedarray.size(); i++) {
+					//if (i < sortedarray.size() - 1) {
+						//file << endl;
+					//}
+					//else {
+						file << sortedarray[i] << "\t";
+					//}
+				}
+			}
+			while (!file.is_open()) {
+				cout << "Ошибка. Попробуйте снова: " << endl;
+				file = OpenFile();
+				if (file.is_open()) {
+					file << "Неотсортированный массив:" << endl;
+					for (int i = 0; i < unsortedarray.size(); i++) {
+					//	if (i < unsortedarray.size() - 1) {
+						//	file << endl;
+						//}
+						//else {
+							file << unsortedarray[i] << "\t";
+						//}
+					}
+					file << endl << "Отсортированный массив:" << endl;
+					for (int i = 0; i < sortedarray.size(); i++) {
+						//if (i < sortedarray.size() - 1) {
+						//	file << endl;
+						//}
+						//else {
+							file << sortedarray[i] << "\t";
+						//}
+					}
+				}
+			}
+		}
+		else {
+			file << "Неотсортированный массив:" << endl;
+			for (int i = 0; i < unsortedarray.size(); i++) {
+				//if (i < unsortedarray.size() - 1) {
+					//file << endl;
+				//}
+				//else {
+					file << unsortedarray[i] << "\t";
+				//}
+			}
+			file << endl << "Отсортированный массив:" << endl;
+			for (int i = 0; i < sortedarray.size(); i++) {
+				//if (i < sortedarray.size() - 1) {
+					//file << endl;
+				//}
+				//else {
+					file << sortedarray[i] << "\t";
+				//}
+			}
+		}
+		cout << endl << "Файл открыт.";
+		cout << endl << endl << "Хотите сохранить результат в файл?" << endl << "Сохранить исходные данные - 1" << endl << "Сохранить результат - 2" << endl << "Нет - 3" << endl << "> ";
+		choice = CheckInt();
+		while (choice != Original and choice != Product and choice != No) {
+			cout << "Такого пункта меню не существует, выберите другой: ";
+			choice = CheckInt();
+		}
+	}
+	if (choice == No) {
+		cout << "Вы выбрали не сохранять данные в файл." << endl << endl;
+	}
+}
 
 void Result(vector<double>& arr) {
 	vector<double> unsortedshella = arr;
@@ -13,7 +183,9 @@ void Result(vector<double>& arr) {
 
 	cout << "\nОтсортированный массив методом Шелла:\n";
 	ShellaArray.sort(unsortedshella);
-	PrintArray(unsortedshella);
+	vector<double> sortedarray = unsortedshella;
+	PrintArray(sortedarray);
+	Save(unsortedshella, sortedarray);
 }
 
 void ManualFill() {
