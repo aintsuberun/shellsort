@@ -2,5 +2,11 @@
 
 using namespace std;
 
+
+void qwe() {
+	cout << "Gqwe" << endl;
+}
 int main() {
-	cout << "hello" << e
+	qwe();
+	cout << "hello" << endl;
+}
