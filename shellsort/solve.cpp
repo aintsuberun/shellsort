@@ -8,7 +8,7 @@
 	enum MainMenu: Перечисление для главного меню.
 	enum Save: Перечисление для выбора сохранения данных.
 	Функция Save(): Функция для сохранения массива в файл.
-	Функция Result(): Вывод неупорядоченного и отсортированного массива, вызов функции сохранения.
+	Функция Result(): Вывод неупорядоченного и отсортированного массива, вызов функции сохранения и вызов сортировки массива.
 	Функция ManualFill(): Ручное заполнение массива пользователем.
 	Функция RandomFill(): Заполнение массива случайными числами.
 	Функция solution(): Основной цикл программы, предоставляющий пользователю выбор между различными опциями меню.
@@ -21,7 +21,7 @@
 enum MainMenu { TestWithRandom = 1, Manual = 2, Exit = 3 };
 enum Save {Original = 1, Product, No};
 
-void Save(vector<double>& unsortedarray, vector<double>& sortedarray) {
+void Save(vector<double>& arr, vector<double>& sortedshella, size_t n) {
 	int choice;
 	cout << endl << endl << "Хотите сохранить результат в файл?" << endl << "Сохранить исходные данные - 1" << endl << "Сохранить результат - 2" << endl << "Нет - 3" << endl << "> ";
 	choice = CheckInt();
@@ -36,67 +36,26 @@ void Save(vector<double>& unsortedarray, vector<double>& sortedarray) {
 			file = OpenFile();
 			if (file.is_open()) {
 				file << "Неотсортированный массив:" << endl;
-				for (int i = 0; i < unsortedarray.size(); i++) {
-					//if (i < unsortedarray.size() - 1) {
-						//file << endl;
-					//}
-					///else {
-						file << unsortedarray[i] << "\t";
-					//}
-				}
-				file << endl << "Отсортированный массив:" << endl;
-				for (int i = 0; i < sortedarray.size(); i++) {
-					//if (i < sortedarray.size() - 1) {
-						//file << endl;
-					//}
-					//else {
-						file << sortedarray[i] << "\t";
-					//}
+				for (int i = 0; i < n; i++) {
+					file << arr[i] << "\t";
 				}
 			}
+
 			while (!file.is_open()) {
 				cout << "Ошибка. Попробуйте снова: " << endl;
 				file = OpenFile();
 				if (file.is_open()) {
 					file << "Неотсортированный массив:" << endl;
-					for (int i = 0; i < unsortedarray.size(); i++) {
-						//if (i < unsortedarray.size() - 1) {
-							//file << endl;
-						//}
-						//else {
-							file << unsortedarray[i] << "\t";
-						//}
-					}
-					file << endl << "Отсортированный массив:" << endl;
-					for (int i = 0; i < sortedarray.size(); i++) {
-						//if (i < sortedarray.size() - 1) {
-							file << endl;
-						//}
-						//else {
-							file << sortedarray[i] << "\t";
-						//}
+					for (int i = 0; i < n; i++) {
+						file << arr[i] << "\t";
 					}
 				}
 			}
 		}
 		else {
 			file << "Неотсортированный массив:" << endl;
-			for (int i = 0; i < unsortedarray.size(); i++) {
-				//if (i < unsortedarray.size() - 1) {
-					file << endl;
-				//}
-				///else {
-					file << unsortedarray[i] << "\t";
-				//}
-			}
-			file << endl << "Отсортированный массив:" << endl;
-			for (int i = 0; i < sortedarray.size(); i++) {
-				//if (i < sortedarray.size() - 1) {
-					file << endl;
-				//}
-				//else {
-					file << sortedarray[i] << "\t";
-				//}
+			for (int i = 0; i < n; i++) {
+					file << arr[i] << "\t";
 			}
 		}
 		cout << endl << "Файл открыт.";
@@ -113,68 +72,26 @@ void Save(vector<double>& unsortedarray, vector<double>& sortedarray) {
 			cout << "Ошибка. Попробуйте снова: " << endl;
 			file = OpenFile();
 			if (file.is_open()) {
-				file << "Неотсортированный массив:" << endl;
-				for (int i = 0; i < unsortedarray.size(); i++) {
-					//if (i < unsortedarray.size() - 1) {
-						//file << endl;
-					//}
-					//else {
-						file << unsortedarray[i] << "\t";
-					//}
-				}
 				file << endl << "Отсортированный массив:" << endl;
-				for (int i = 0; i < sortedarray.size(); i++) {
-					//if (i < sortedarray.size() - 1) {
-						//file << endl;
-					//}
-					//else {
-						file << sortedarray[i] << "\t";
-					//}
+				for (int i = 0; i < n; i++) {
+						file << sortedshella[i] << "\t";
 				}
 			}
 			while (!file.is_open()) {
 				cout << "Ошибка. Попробуйте снова: " << endl;
 				file = OpenFile();
 				if (file.is_open()) {
-					file << "Неотсортированный массив:" << endl;
-					for (int i = 0; i < unsortedarray.size(); i++) {
-					//	if (i < unsortedarray.size() - 1) {
-						//	file << endl;
-						//}
-						//else {
-							file << unsortedarray[i] << "\t";
-						//}
-					}
-					file << endl << "Отсортированный массив:" << endl;
-					for (int i = 0; i < sortedarray.size(); i++) {
-						//if (i < sortedarray.size() - 1) {
-						//	file << endl;
-						//}
-						//else {
-							file << sortedarray[i] << "\t";
-						//}
+					file << "Отсортированный массив:" << endl;
+					for (int i = 0; i < n; i++) {
+							file << sortedshella[i] << "\t";
 					}
 				}
 			}
 		}
 		else {
-			file << "Неотсортированный массив:" << endl;
-			for (int i = 0; i < unsortedarray.size(); i++) {
-				//if (i < unsortedarray.size() - 1) {
-					//file << endl;
-				//}
-				//else {
-					file << unsortedarray[i] << "\t";
-				//}
-			}
-			file << endl << "Отсортированный массив:" << endl;
-			for (int i = 0; i < sortedarray.size(); i++) {
-				//if (i < sortedarray.size() - 1) {
-					//file << endl;
-				//}
-				//else {
-					file << sortedarray[i] << "\t";
-				//}
+			file << "Отсортированный массив:" << endl;
+			for (int i = 0; i < n; i++) {
+					file << sortedshella[i] << "\t";
 			}
 		}
 		cout << endl << "Файл открыт.";
@@ -191,17 +108,16 @@ void Save(vector<double>& unsortedarray, vector<double>& sortedarray) {
 }
 
 void Result(vector<double>& arr) {
-	vector<double> unsortedshella = arr;
+	vector<double> sortedshella = arr;
 	cout << "Неупорядоченный массив:" << endl;
-	PrintArray(unsortedshella);
-
+	PrintArray(sortedshella);
+	size_t n = sortedshella.size();
 	ShellaSort ShellaArray;
 
 	cout << "\nОтсортированный массив методом Шелла:\n";
-	ShellaArray.sort(unsortedshella);
-	vector<double> sortedarray = unsortedshella;
-	PrintArray(sortedarray);
-	Save(unsortedshella, sortedarray);
+	ShellaArray.sort(sortedshella);
+	PrintArray(sortedshella);
+	Save(arr, sortedshella, n);
 }
 
 void ManualFill() {
@@ -230,7 +146,7 @@ void RandomFill() {
 		n = CheckInt();
 	}
 	vector<double> arr(n);
-	cout << "Введите элементы масива:\n";
+	cout << "Случайные элементы массива:\n";
 	for (int i = 0; i < n; i++) {
 		arr[i] = -100 + (rand() % 20001) / 100.0;
 	}
