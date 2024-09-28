@@ -39,8 +39,8 @@ void Save(vector<double>& arr, vector<double>& sortedshella, size_t n) {
 				for (int i = 0; i < n; i++) {
 					file << arr[i] << "\t";
 				}
+				file << endl;
 			}
-
 			while (!file.is_open()) {
 				cout << "Ошибка. Попробуйте снова: " << endl;
 				file = OpenFile();
@@ -49,14 +49,16 @@ void Save(vector<double>& arr, vector<double>& sortedshella, size_t n) {
 					for (int i = 0; i < n; i++) {
 						file << arr[i] << "\t";
 					}
+					file << endl;
 				}
 			}
 		}
-		else {
+		if (file.is_open()) {
 			file << "Неотсортированный массив:" << endl;
 			for (int i = 0; i < n; i++) {
 					file << arr[i] << "\t";
 			}
+			file << endl;
 		}
 		cout << endl << "Файл открыт.";
 		cout << endl << endl << "Хотите сохранить результат в файл?" << endl << "Сохранить исходные данные - 1" << endl << "Сохранить результат - 2" << endl << "Нет - 3" << endl << "> ";
@@ -76,6 +78,7 @@ void Save(vector<double>& arr, vector<double>& sortedshella, size_t n) {
 				for (int i = 0; i < n; i++) {
 						file << sortedshella[i] << "\t";
 				}
+				file << endl;
 			}
 			while (!file.is_open()) {
 				cout << "Ошибка. Попробуйте снова: " << endl;
@@ -86,6 +89,7 @@ void Save(vector<double>& arr, vector<double>& sortedshella, size_t n) {
 							file << sortedshella[i] << "\t";
 					}
 				}
+				file << endl;
 			}
 		}
 		else {
@@ -93,6 +97,7 @@ void Save(vector<double>& arr, vector<double>& sortedshella, size_t n) {
 			for (int i = 0; i < n; i++) {
 					file << sortedshella[i] << "\t";
 			}
+			file << endl;
 		}
 		cout << endl << "Файл открыт.";
 		cout << endl << endl << "Хотите сохранить результат в файл?" << endl << "Сохранить исходные данные - 1" << endl << "Сохранить результат - 2" << endl << "Нет - 3" << endl << "> ";
