@@ -25,6 +25,7 @@ public:
 protected:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
+
 private slots:
     void on_pushButton_Show_clicked();
     void onReadyRead();

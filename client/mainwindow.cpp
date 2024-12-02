@@ -30,7 +30,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     connectToServer();
     on_pushButton_Show_clicked();
-
     ui->pushButton_Show->hide();
 
 }
@@ -60,7 +59,7 @@ QString convertingTSFL(QList<int> lis){
 }
 
 void MainWindow::onReadyRead() {
-    // Чтение всех доступных данных из сокета
+    // Чтение данных из сокета
     QByteArray data = socket->readAll();
 
     // Преобразуем полученные данные в JSON-документ
@@ -70,7 +69,7 @@ void MainWindow::onReadyRead() {
     if (doc.isObject()) {
         QJsonObject response = doc.object();
 
-        // Проверяем, что в ответе есть массив с числами
+        // Проверка на наличие массива элементов и массивов
         if(response["action"] == "get_elements"){
             if (response.contains("elements") && response["elements"].isArray()) {
                 QJsonArray elementsArray = response["elements"].toArray();
@@ -112,6 +111,7 @@ void MainWindow::onReadyRead() {
                     isEmpty = false;
 
                 }
+                // Обновление количества строк для таблицы и подсчет
                 ui->tableWidget->setRowCount(0);
                 if(isEmpty) return;
 
@@ -122,11 +122,12 @@ void MainWindow::onReadyRead() {
                 }
                 ui->tableWidget->setRowCount(RowCount);
 
+                // Заполнение таблицы данными
                 RowCount = 0;
                 for(int i = 0; i < lis.size(); i++){
                     if(lis[i].isEmpty()) continue;
                     RowCount++;
-
+                    // Создание и настройка ячейки для id массива
                     QTableWidgetItem *item_id = new QTableWidgetItem(QString::number(i));
                     item_id->setFlags(item_id->flags() & ~Qt::ItemIsEditable);
 
@@ -328,11 +329,13 @@ void MainWindow::on_pushButton_Close_clicked()
     this->close();
 }
 
+// Сохраняет начальную позицию мыши для отслеживания перемещения окна
 void MainWindow::mousePressEvent(QMouseEvent *event) {
     if (event->button() == Qt::LeftButton)
         dragStart = (event->globalPosition() - frameGeometry().topLeft()).toPoint();
 }
 
+// Перемещает окно по экрану, если левая кнопка мыши удерживается
 void MainWindow::mouseMoveEvent(QMouseEvent *event) {
     if (event->buttons() & Qt::LeftButton)
         move((event->globalPosition() - dragStart).toPoint());
